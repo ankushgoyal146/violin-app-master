@@ -1,0 +1,60 @@
+<div class="resultwrapper">
+<h4 align="center">Results</h4>
+<br>
+<label class="time-spent">Total time taken is : {{model.timeTaken}} seconds<br></label>
+<br>
+<label class="time-spent"> TotalMarks: {{totalMarksGet}} </label><br>
+<label class="time-spent"> Total percentage: {{percentage}} % </label><br><br>
+{{#if resultStatus}}
+<label class="time-spent"> You have Pass </label>
+{{else}}
+<label class="time-spent"> You have Fail </label>
+{{/if}}
+
+ {{result-comp attemptQuestion=attemptQuestion totalQuestionNumber=totalQuestionNumber
+     skipQuestion=skipQuestion totalCorrectAnswer=CorrectAnswer  incorrectAnswer=incorrectAnswer}}
+ <br>
+ <br>
+ <br>
+{{#each qa in model}}
+{{#if qa.attempted}}
+<div class="attempted_Question">
+  <label id="timer">Time Spent : {{qa.totalTimeSpent}}</label><br><br>
+  <label class="time-spent1">{{qa.questionNum}} - {{ qa.question }}</label> <br>
+  {{#each qa.strike as |ans| }}
+    {{#if qa.attempted}}
+      {{#if ans.correctstrike}}
+        {{wronganswer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+      {{else}}
+         {{rightanswer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+      {{/if}}
+    {{else}}
+      {{wrong-answer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+    {{/if}}
+  {{/each}}
+  <br>
+  <br>
+  </div>
+  {{else}}
+  <div class="Unattempted_Question">
+  <label id="timer">Time Spent : {{qa.totalTimeSpent}}</label><br><br>
+  <label class="time-spent1">{{qa.questionNum}} - {{ qa.question }}</label> <br>
+  {{#each qa.strike as |ans| }}
+    {{#if qa.attempted}}
+      {{#if ans.correctstrike}}
+        {{wronganswer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+      {{else}}
+         {{rightanswer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+      {{/if}}
+    {{else}}
+     {{wrong-answer-comp answer=ans.answer answerText=ans.answerText isClicked=ans.selected }}
+    {{/if}}
+  {{/each}}
+  <br>
+  <br>
+  </div>
+  {{/if}}
+  <br>
+  <br>
+{{/each}}
+</div>
